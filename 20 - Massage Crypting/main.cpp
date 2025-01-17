@@ -46,10 +46,22 @@ std::vector<long long int> c_formul(std::vector<int> inted_massage, int e, int n
 	for (int i : inted_massage) {
 		long long int m = 1;
 		for (int i2 = 0; i2 < e; i2++) m *= i;
-		c_formul.push_back(m / n + m % n);
+		c_formul.push_back(m % n);
 		pos++;
 	}
 	return c_formul;
+}
+
+std::vector<long long int> m_formul(std::vector<long long int> c_formul, int d, int n) {
+	std::vector<long long int> m_formul;
+	int pos = 0;
+	for (int i : c_formul) {
+		long long int c = 1;
+		for (int i2 = 0; i2 < d; i2++) c *= i;
+		m_formul.push_back(c % n);
+		pos++;
+	}
+	return m_formul;
 }
 
 int main() {
@@ -66,6 +78,8 @@ int main() {
 
 	std::vector<long long int> c = c_formul(inted_massage, e, n);
 
+	std::vector<long long int> m = m_formul(c, d, n);
+
 	union Symbol {
 		char a;
 		int b;
@@ -73,7 +87,7 @@ int main() {
 
 	for (int i = 0; i < c.size(); i++)
 	{
-		std::cout << inted_massage[i] << '\t' << c[i] << '\n';
+		std::cout << n << '\t' << d << '\t' << inted_massage[i] << '\t' << c[i] << '\t' << m[i] << '\n';
 	}
 
 	return 0;
