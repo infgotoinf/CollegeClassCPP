@@ -1,5 +1,7 @@
 #include <iostream>
+#include <stdexcept>
 #include <vector>
+#include <tuple>
 
 template <typename T>
 T add(T a, T b) {
@@ -37,12 +39,15 @@ public:
 	}
 
 	T3 operator[](unsigned int index) {
-		if (index > size) throw std::out_of_range("Out of range");
+		if (index >= size) throw std::out_of_range("Out of range");
 
 		return data[index];
 	}
 
-	size_t GetSize() return size;
+	size_t GetSize() const
+	{
+		return size;
+	}
 };
 
 
@@ -55,16 +60,16 @@ private:
 public:
 	BoolArray(size_t siz)
 	{
-		this->size = 0;
-		data = new int8_t[size / 8];
+		size = 0;
+		data = new int8_t[siz / 8];
 	}
 
-	~Array()
+	~BoolArray()
 	{
 		delete[] data;
 	}
 
-	void add(T3 value) {
+	/*void add(T3 value) {
 		if (size == capacity) {
 			capacity *= 2;
 			T4* old_data = data;
@@ -74,18 +79,59 @@ public:
 			}
 		}
 		data[size++] = value;
-	}
+	}*/
 
 	T4 operator[](unsigned int index) {
-		if (index > size) throw std::out_of_range("Out of range");
+		if (index >= size) throw std::out_of_range("Out of range");
 
-		return (data[i / 8] >> (7 - i)) & 1;
+		size_t v = index / 8;
+		size_t u = index % 8;
+
+		return (data[v] >> (7 - u)) & 1;
 	}
 
-	size_t GetSize() const return size;
+	size_t GetSize() const
+	{
+		return size;
+	}
 };
 
 
+
+template <typename First>
+void print2(First f)
+{
+	std::cout << f << "\n\n";
+}
+
+template <typename TV>
+void print2(std::vector<TV> vec)
+{
+	for (auto i : vec) {
+		std::cout << i << ' ';
+	}
+	std::cout << "\n\n";
+}
+
+template <typename First, typename ... TT>
+void print2(First f, TT ... rest)
+{
+	std::cout << f << ' ';
+	print2(rest...);
+}
+
+template <typename a, typename c>
+struct IsSame
+{
+	static const bool bo = false;
+	IsSame(a b, c a) {};
+};
+template <typename a, typename a>
+struct IsSame
+{
+	static const bool bo = true;
+	IsSame(a b, a a) {};
+};
 
 int main()
 {
@@ -118,14 +164,27 @@ int main()
 	for (int i = 0; i < nums.GetSize(); i++) {
 		std::cout << nums[i] << ' ';
 	}
-	std::cout << std::endl;
-
-	Array<bool> da;
+	std::cout << '\n' << std::endl;
 
 	//// value = 0
 	//data[size / 8] &= ~(1 << (size % 8));
 
 	//// value = 1
 	//data[size / 8] |= (1 << (size % 8));
+
+
+
+	print2(10, "dfji", 98.3, 't', true, 16e+3);
+
+	std::tuple<int, double, std::vector<bool>> a(10, 98.3, {true, true, false});
+	std::get<2>(a)[1] = false;
+	std::cout << std::get<2>(a)[1];
+
+	print2(a);
+
+	IsSame<char, int> q('a', 1);
+	IsSame<char, int> q2('a', 's');
+	std::cout << q.bo;
+	std::cout << q2.bo;
 	return 0;
 }
