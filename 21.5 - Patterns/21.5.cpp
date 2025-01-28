@@ -15,8 +15,8 @@ template <typename T3>
 struct Array {
 private:
 	T3* data;
-	unsigned int size = 0;
-	unsigned int capacity = 2;
+	size_t size = 0;
+	size_t capacity = 2;
 public:
 	Array(int init_capacity = 4) : capacity(init_capacity), size(0), data(new T3[init_capacity]) {}
 
@@ -37,18 +37,55 @@ public:
 	}
 
 	T3 operator[](unsigned int index) {
-		if (index > size) {
-			int no = - 1;
-			return no;
-			//throw out_of_range("Idx out of range");
-		}
+		if (index > size) throw std::out_of_range("Out of range");
+
 		return data[index];
 	}
 
-	auto GetSize() {
-		return size;
-	}
+	size_t GetSize() return size;
 };
+
+
+
+template <typename T4>
+struct BoolArray {
+private:
+	T4* data;
+	size_t size = 0;
+public:
+	BoolArray(size_t siz)
+	{
+		this->size = 0;
+		data = new int8_t[size / 8];
+	}
+
+	~Array()
+	{
+		delete[] data;
+	}
+
+	void add(T3 value) {
+		if (size == capacity) {
+			capacity *= 2;
+			T4* old_data = data;
+			data = new T4[capacity];
+			for (int i = 0; i < size; i++) {
+				data[i] = old_data[i];
+			}
+		}
+		data[size++] = value;
+	}
+
+	T4 operator[](unsigned int index) {
+		if (index > size) throw std::out_of_range("Out of range");
+
+		return (data[i / 8] >> (7 - i)) & 1;
+	}
+
+	size_t GetSize() const return size;
+};
+
+
 
 int main()
 {
@@ -81,6 +118,9 @@ int main()
 	for (int i = 0; i < nums.GetSize(); i++) {
 		std::cout << nums[i] << ' ';
 	}
+	std::cout << std::endl;
+
+	Array<bool> da;
 
 	//// value = 0
 	//data[size / 8] &= ~(1 << (size % 8));
