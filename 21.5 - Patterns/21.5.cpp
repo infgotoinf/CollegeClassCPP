@@ -120,17 +120,41 @@ void print2(First f, TT ... rest)
 	print2(rest...);
 }
 
-template <typename a, typename c>
-struct IsSame
+//template <typename a, typename c>
+//struct IsSame
+//{
+//	static const bool bo = false;
+//	IsSame(a b, c a) {};
+//};
+//template <typename a, typename a>
+//struct IsSame
+//{
+//	static const bool bo = true;
+//	IsSame(a b, a a) {};
+//};
+
+
+
+template <typename T>
+struct Optional
 {
-	static const bool bo = false;
-	IsSame(a b, c a) {};
-};
-template <typename a, typename a>
-struct IsSame
-{
-	static const bool bo = true;
-	IsSame(a b, a a) {};
+	T* value;
+	Optional(T* v = nullptr)
+	{
+		value = v;
+	}
+
+	bool booling()
+	{
+		if (value == nullptr) return 0;
+		return (bool)value;
+	}
+
+	T* operator*()
+	{
+		if (value == nullptr) return "No";
+		return value;
+	}
 };
 
 int main()
@@ -174,7 +198,7 @@ int main()
 
 
 
-	print2(10, "dfji", 98.3, 't', true, 16e+3);
+	/*print2(10, "dfji", 98.3, 't', true, 16e+3);
 
 	std::tuple<int, double, std::vector<bool>> a(10, 98.3, {true, true, false});
 	std::get<2>(a)[1] = false;
@@ -185,6 +209,15 @@ int main()
 	IsSame<char, int> q('a', 1);
 	IsSame<char, int> q2('a', 's');
 	std::cout << q.bo;
-	std::cout << q2.bo;
+	std::cout << q2.bo;*/
+
+
+
+	int* da = new int{ 12 };
+	Optional<int*> aaa;
+	Optional<int*> bbb(da);
+
+	std::cout << aaa.booling() << ' ' << *aaa << '\n';
+	std::cout << bbb.booling() << ' ' << *bbb << '\n';
 	return 0;
 }
