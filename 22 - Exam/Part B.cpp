@@ -90,5 +90,6 @@ int main()
 	//double V = sqrt(v * v + v2 * v2);
 	double V = sqrt(v2 * v2 + 2 * g * H);
 	std::cout << V;
+	std::cout << "\n\n\n\n\n\n\n________________________";
 	return 0;
 }
