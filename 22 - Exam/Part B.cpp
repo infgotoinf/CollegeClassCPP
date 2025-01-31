@@ -1,9 +1,10 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <stdexcept>
 #include <vector>
 #include <random>
+#include <windows.h>
 
-// Функция создангия сортированого вектора с отсутствующими элементами
+// Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРіРёСЏ СЃРѕСЂС‚РёСЂРѕРІР°РЅРѕРіРѕ РІРµРєС‚РѕСЂР° СЃ РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‰РёРјРё СЌР»РµРјРµРЅС‚Р°РјРё
 void create_randomized(std::vector<int> &ILoveDihotomia, unsigned const end_num, bool randomize)
 {
 	std::random_device dev;
@@ -17,7 +18,7 @@ void create_randomized(std::vector<int> &ILoveDihotomia, unsigned const end_num,
 	}
 }
 
-// Вывод вектора с переносом строки
+// Р’С‹РІРѕРґ РІРµРєС‚РѕСЂР° СЃ РїРµСЂРµРЅРѕСЃРѕРј СЃС‚СЂРѕРєРё
 void print(std::vector<int> &ILoveDihotomia)
 {
 	int line_break = 1;
@@ -28,7 +29,7 @@ void print(std::vector<int> &ILoveDihotomia)
 	}
 }
 
-// ФУНКЦИЯ НАХОДЯЩАЯ ИНДЕКС ЧИСЛА
+// Р¤РЈРќРљР¦РРЇ РќРђРҐРћР”РЇР©РђРЇ РРќР”Р•РљРЎ Р§РРЎР›Рђ
 int DIHOTOMIA(std::vector<int>& ILoveDihotomia, int num)
 {
 	if (ILoveDihotomia.front() > num || ILoveDihotomia.back() < num)
@@ -53,11 +54,11 @@ int main()
 {
 	setlocale(0, "");
 	// 1. DIHOTAMIA (binary search)
-	/* А СЕЙЧАС ДАВАЙ ТЕ ОБЪЯСНЮ КАК РАБОТАЕТ ДИХОТОМИЯ...
-	[1000 строк комментариев]
-	И ТАК МЫ МОЖЕМ НАЙТИ ЛЮБЫЕ ЗНАЧЕНИЯ ФУНКЦИИ, ВСЕМ СПАСИБО И ПОКА-ПОКА
+	/* Рђ РЎР•Р™Р§РђРЎ Р”РђР’РђР™ РўР• РћР‘РЄРЇРЎРќР® РљРђРљ Р РђР‘РћРўРђР•Рў Р”РРҐРћРўРћРњРРЇ...
+	[1000 СЃС‚СЂРѕРє РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ]
+	Р РўРђРљ РњР« РњРћР–Р•Рњ РќРђР™РўР Р›Р®Р‘Р«Р• Р—РќРђР§Р•РќРРЇ Р¤РЈРќРљР¦РР, Р’РЎР•Рњ РЎРџРђРЎРР‘Рћ Р РџРћРљРђ-РџРћРљРђ
 	*/
-	std::vector<int> ILoveDihotomia;
+	/*std::vector<int> ILoveDihotomia;
 	
 	std::cout << "Creat randomized????? ";
 	bool make_rand;
@@ -75,21 +76,51 @@ int main()
 		std::cout << char(1) << char(1) << char(1) << char(1) << char(1);
 	}
 	std::cin >> make_rand;
-	system("cls");
+	system("cls");*/
 
 	// 2. NUKE BOMBER
-	const double g = 9.81; // Скорость свободного падения
-	double H; // Высота
-	std::cout << "Введите высоту: ";
+	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+	const double g = 9.81; // РЎРєРѕСЂРѕСЃС‚СЊ СЃРІРѕР±РѕРґРЅРѕРіРѕ РїР°РґРµРЅРёСЏ
+	double H; // Р’С‹СЃРѕС‚Р°
+	std::cout << "Р’РІРµРґРёС‚Рµ РІС‹СЃРѕС‚Сѓ: ";
 	std::cin >> H;
-	//double T = sqrt(H * 2 / g); // Время полёта
-	//double v = g * T; // Горизонтальная скорость
-	double v2 = 100; // Вертикальная скорость
-	std::cout << "Введите скорость самолёта: ";
+	//double T = sqrt(H * 2 / g); // Р’СЂРµРјСЏ РїРѕР»С‘С‚Р°
+	//double v = g * T; // Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ
+	double v2; // Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ
+	std::cout << "Р’РІРµРґРёС‚Рµ СЃРєРѕСЂРѕСЃС‚СЊ СЃР°РјРѕР»С‘С‚Р°: ";
 	std::cin >> v2;
 	//double V = sqrt(v * v + v2 * v2);
-	double V = sqrt(v2 * v2 + 2 * g * H);
-	std::cout << V;
-	std::cout << "\n\n\n\n\n\n\n________________________";
+	double V = sqrt(v2 * v2 + 2 * g * H); // РљРѕРЅРµС‡РЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ
+	double T = sqrt(2 * H / g); // Р’СЂРµРјСЏ РїР°РґРµРЅРёСЏ
+
+	std::cout << "РљРѕРЅРµС‡РЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ: " << V << "; Р’СЂРµРјСЏ РїР°РґРµРЅРёСЏ: " << T << "\n\n";
+	for (int i = H; i > 0; i -= 100) std::cout << '\n';
+	std::cout << "                   _______\n";
+	std::cout << "                  /       \\\n";
+	std::cout << "                 /_________\\\n";
+	std::cout << "                  |   _   |\n";
+	std::cout << "                  |  |_|  |\n";
+	std::cout << "__________________|       |__________________";
+	Sleep(2000);
+
+	int speed = 100000 / v2;
+	char boomber1[] = "|\\___------------\\";
+	char boomber2[] = "|__________|_|_____|";
+	for (short i = 0, i2 = -19; i < 47; i++, i2++)
+	{
+		SetConsoleCursorPosition(console, { 0, 3 });
+		std::cout << "                                             \n";
+		std::cout << "                                             ";
+		SetConsoleCursorPosition(console, {i, 3});
+		std::cout << boomber1;
+		SetConsoleCursorPosition(console, { i, 4 });
+		std::cout << boomber2;
+		SetConsoleCursorPosition(console, { 45, 3 });
+		std::cout << "                    ";
+		SetConsoleCursorPosition(console, { 45, 4 });
+		std::cout << "                    ";
+		Sleep(speed);
+	}
+	while (1);
 	return 0;
 }
