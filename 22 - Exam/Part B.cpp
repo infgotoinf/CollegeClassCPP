@@ -91,9 +91,10 @@ int main()
 	std::cin >> v2;
 	//double V = sqrt(v * v + v2 * v2);
 	double V = sqrt(v2 * v2 + 2 * g * H); // Конечная скорость
-	double T = sqrt(2 * H / g); // Время падения
+	double T = sqrt(H / (2 * g)); // Время падения
+	double L = v2 * T;
 
-	std::cout << "Конечная скорость: " << V << "; Время падения: " << T << "\n\n";
+	std::cout << "Конечная скорость: " << V << "; Время падения: " << T << "; Расстояние: " << L << "\n\n";
 	for (int i = H; i > 0; i -= 100) std::cout << '\n';
 	std::cout << "                   _______\n";
 	std::cout << "                  /       \\\n";
@@ -106,7 +107,7 @@ int main()
 	int speed = 100000 / v2;
 	char boomber1[] = "|\\___------------\\";
 	char boomber2[] = "|__________|_|_____|";
-	for (short i = 0, i2 = -19; i < 47; i++, i2++)
+	for (short i = 0, i2 = -19; i < 46; i++, i2++)
 	{
 		SetConsoleCursorPosition(console, { 0, 3 });
 		std::cout << "                                             \n";
