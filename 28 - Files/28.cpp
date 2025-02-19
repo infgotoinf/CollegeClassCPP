@@ -205,56 +205,56 @@ int main()
 							}
 							names.push_back(stri);
 							std::cout << str << '\n';
-							break;
 						}
 					}
 					file1.close();
-
-					std::cout << '\n';
 				}
-				do {
-					std::cout << "Enater pacient's name:\n";
-					std::cin >> name;
-					for (std::string nam : names)
+				
+				std::cout << "Enter pacient's name:\n";
+				std::cin >> name;
+				for (std::string nam : names)
+				{
+					if (nam == name) continue;
+					int num;
+					std::cout << "Enter how many years to add:\n";
+					std::cin >> num;
+					
+					std::ifstream file1;
+					file1.open("pacients\\" + name + ".txt");
+
+					if (!file1.is_open())
 					{
-						if (nam == name) continue;
-						int num;
-						std::cout << "Enater how many years to add:\n";
-						std::cin >> num;
-						
-						std::ifstream file1;
-						file1.open(name);
-
-						if (!file1.is_open())
-						{
-							std::cerr << "Error!";
-						}
-
-						std::string str;
-						std::string stri;
-						while (std::getline(file1, str))
-						{
-							int i = 0;
-							bool go = true;
-							if (go) {
-								for (char s : str)
-								{
-									if (i++ > 6)
-									{
-										str += s;
-									}
-								}
-								num += std::stoi(str);
-								stri = "Year: " + num + '\n';
-								go = false;
-								continue;
-							}
-							stri += str + '\n';
-							break;
-						}
-						file1.close();
+						std::cerr << "Error!";
 					}
-				} while (1);
+
+					std::string str, strn;
+					std::string stri;
+					bool go = true;
+					while (std::getline(file1, str))
+					{
+						int i = 0;
+						if (go) {
+							for (char s : str)
+							{
+								if (i++ > 6)
+								{
+									strn += s;
+								}
+							}
+							num += std::stoi(strn);
+							stri = "Year: " + std::to_string(num) + '\n';
+							go = false;
+							continue;
+						}
+						stri += str + '\n';
+					}
+					file1.close();
+
+					std::ofstream file2;
+					file2.open("pacients\\" + name + ".txt");
+					file2 << stri;
+					file2.close();
+				}
 				break;
 			}
 			case 3: // print pacient
@@ -319,7 +319,7 @@ int main()
 		}
 		action = 0, action2 = 0;
 		std::cout << std::endl;
-	} while (1);
+	} while(1);
 
 
 	return 0;
