@@ -101,19 +101,19 @@ public:
 
 int main()
 {
-	//// Поток вывода в файл
-	//std::ofstream file;
-	//file.open("out.txt");
+	// Поток вывода в файл
+	std::ofstream file;
+	file.open("out.txt");
 
-	//if (!file.is_open())
-	//{
-	//	std::cerr << "Error!";
-	//	return 0;
-	//}
+	if (!file.is_open())
+	{
+		std::cerr << "Error!";
+		return 0;
+	}
 
-	//file << "Hello world!";
+	file << "Hello world!";
 
-	//file.close();
+	file.close();
 
 	//// Поток ввода в файл
 	//std::ifstream file1;
@@ -136,190 +136,190 @@ int main()
 
 	//file1.close();
 
-	const std::filesystem::path dir_pacients{ "pacients" };
-	const std::filesystem::path dir_palata{ "palatas" };
-	const std::filesystem::path dir_durkas{ "durkas" };
+	//const std::filesystem::path dir_pacients{ "pacients" };
+	//const std::filesystem::path dir_palata{ "palatas" };
+	//const std::filesystem::path dir_durkas{ "durkas" };
 
-	do
-	{
-		short int action = 0, action2 = 0;
-		std::cout << "1: go to pacients; 2: go to palatas; 3: go to durka\n";
-		std::cin >> action;
-		switch (action)
-		{
-		case 1: // go to pacients
-			std::cout << "1: create a pacient; 2: add years; 3: print pacient\n";
-			std::cin >> action2;
-			switch (action2)
-			{
-			case 1: // create a pacient
-			{
-				int year;
-				std::string name, desiace;
-				std::cout << "Enter his year, name, desiace:\n";
-				std::cin >> year >> name >> desiace;
-				pacient pac(year, name, desiace);
+	//do
+	//{
+	//	short int action = 0, action2 = 0;
+	//	std::cout << "1: go to pacients; 2: go to palatas; 3: go to durka\n";
+	//	std::cin >> action;
+	//	switch (action)
+	//	{
+	//	case 1: // go to pacients
+	//		std::cout << "1: create a pacient; 2: add years; 3: print pacient\n";
+	//		std::cin >> action2;
+	//		switch (action2)
+	//		{
+	//		case 1: // create a pacient
+	//		{
+	//			int year;
+	//			std::string name, desiace;
+	//			std::cout << "Enter his year, name, desiace:\n";
+	//			std::cin >> year >> name >> desiace;
+	//			pacient pac(year, name, desiace);
 
-				std::ofstream file;
-				file.open("pacients\\" + name + ".txt");
+	//			std::ofstream file;
+	//			file.open("pacients\\" + name + ".txt");
 
-				if (!file.is_open())
-				{
-					std::cerr << "Error!";
-					return 0;
-				}
+	//			if (!file.is_open())
+	//			{
+	//				std::cerr << "Error!";
+	//				return 0;
+	//			}
 
-				file << pac.return_pacient();
+	//			file << pac.return_pacient();
 
-				file.close();
-				break;
-			}
-			case 2: // add years
-			{
-				std::string name;
-				std::list<std::string> names;
-				for (auto const& entry : std::filesystem::directory_iterator{ dir_pacients })
-				{
-					std::ifstream file1;
-					file1.open(entry);
+	//			file.close();
+	//			break;
+	//		}
+	//		case 2: // add years
+	//		{
+	//			std::string name;
+	//			std::list<std::string> names;
+	//			for (auto const& entry : std::filesystem::directory_iterator{ dir_pacients })
+	//			{
+	//				std::ifstream file1;
+	//				file1.open(entry);
 
-					if (!file1.is_open())
-					{
-						std::cerr << "Error!";
-					}
+	//				if (!file1.is_open())
+	//				{
+	//					std::cerr << "Error!";
+	//				}
 
-					std::string str;
-					int count = 0;
-					while (std::getline(file1, str))
-					{
-						if (count++ == 1)
-						{
-							int i = 0;
-							std::string stri = "";
-							for (char s : str)
-							{
-								if (i++ > 5)
-								{
-									stri += s;
-								}
-							}
-							names.push_back(stri);
-							std::cout << str << '\n';
-						}
-					}
-					file1.close();
-				}
-				
-				std::cout << "Enter pacient's name:\n";
-				std::cin >> name;
-				for (std::string nam : names)
-				{
-					if (nam == name) continue;
-					int num;
-					std::cout << "Enter how many years to add:\n";
-					std::cin >> num;
-					
-					std::ifstream file1;
-					file1.open("pacients\\" + name + ".txt");
+	//				std::string str;
+	//				int count = 0;
+	//				while (std::getline(file1, str))
+	//				{
+	//					if (count++ == 1)
+	//					{
+	//						int i = 0;
+	//						std::string stri = "";
+	//						for (char s : str)
+	//						{
+	//							if (i++ > 5)
+	//							{
+	//								stri += s;
+	//							}
+	//						}
+	//						names.push_back(stri);
+	//						std::cout << str << '\n';
+	//					}
+	//				}
+	//				file1.close();
+	//			}
+	//			
+	//			std::cout << "Enter pacient's name:\n";
+	//			std::cin >> name;
+	//			for (std::string nam : names)
+	//			{
+	//				if (nam == name) continue;
+	//				int num;
+	//				std::cout << "Enter how many years to add:\n";
+	//				std::cin >> num;
+	//				
+	//				std::ifstream file1;
+	//				file1.open("pacients\\" + name + ".txt");
 
-					if (!file1.is_open())
-					{
-						std::cerr << "Error!";
-					}
+	//				if (!file1.is_open())
+	//				{
+	//					std::cerr << "Error!";
+	//				}
 
-					std::string str, strn;
-					std::string stri;
-					bool go = true;
-					while (std::getline(file1, str))
-					{
-						int i = 0;
-						if (go) {
-							for (char s : str)
-							{
-								if (i++ > 6)
-								{
-									strn += s;
-								}
-							}
-							num += std::stoi(strn);
-							stri = "Year: " + std::to_string(num) + '\n';
-							go = false;
-							continue;
-						}
-						stri += str + '\n';
-					}
-					file1.close();
+	//				std::string str, strn;
+	//				std::string stri;
+	//				bool go = true;
+	//				while (std::getline(file1, str))
+	//				{
+	//					int i = 0;
+	//					if (go) {
+	//						for (char s : str)
+	//						{
+	//							if (i++ > 6)
+	//							{
+	//								strn += s;
+	//							}
+	//						}
+	//						num += std::stoi(strn);
+	//						stri = "Year: " + std::to_string(num) + '\n';
+	//						go = false;
+	//						continue;
+	//					}
+	//					stri += str + '\n';
+	//				}
+	//				file1.close();
 
-					std::ofstream file2;
-					file2.open("pacients\\" + name + ".txt");
-					file2 << stri;
-					file2.close();
-				}
-				break;
-			}
-			case 3: // print pacient
-				for (auto const& entry : std::filesystem::directory_iterator{ dir_pacients })
-				{
-					std::ifstream file1;
-					file1.open(entry);
+	//				std::ofstream file2;
+	//				file2.open("pacients\\" + name + ".txt");
+	//				file2 << stri;
+	//				file2.close();
+	//			}
+	//			break;
+	//		}
+	//		case 3: // print pacient
+	//			for (auto const& entry : std::filesystem::directory_iterator{ dir_pacients })
+	//			{
+	//				std::ifstream file1;
+	//				file1.open(entry);
 
-					if (!file1.is_open())
-					{
-						std::cerr << "Error!";
-					}
+	//				if (!file1.is_open())
+	//				{
+	//					std::cerr << "Error!";
+	//				}
 
-					std::string str;
+	//				std::string str;
 
-					while (std::getline(file1, str))
-					{
-						std::cout << str << '\n';
-					}
-					file1.close();
+	//				while (std::getline(file1, str))
+	//				{
+	//					std::cout << str << '\n';
+	//				}
+	//				file1.close();
 
-					std::cout << '\n';
-				}
-				break;
-			default:
-				std::cout << "Wrong action!\n";
-			}
-			break;
-		case 2: // go to palatas
-			std::cout << "1: add a pacient; 2: print palatas\n";
-			std::cin >> action2;
-			switch (action2)
-			{
-			case 1:
-				std::cout << "1: create a pacient; 2: add years; 3: print pacients\n";
-				break;
-			case 2:
-				std::cout << "1: add a pacient; 2: print palatas\n";
-				break;
-			default:
-				std::cout << "Wrong action!\n";
-			}
-			break;
-			break;
-		case 3: // go to durkas
-			std::cout << "1: add a palata; 2: print durka\n";
-			std::cin >> action2;
-			switch (action2)
-			{
-			case 1:
-				std::cout << "1: create a pacient; 2: add years; 3: print pacients\n";
-				break;
-			case 2:
-				std::cout << "1: add a pacient; 2: print palatas\n";
-				break;
-			default:
-				std::cout << "Wrong action!\n";
-			}
-			break;
-		default:
-			std::cout << "Wrong action!\n";
-		}
-		action = 0, action2 = 0;
-		std::cout << std::endl;
-	} while(1);
+	//				std::cout << '\n';
+	//			}
+	//			break;
+	//		default:
+	//			std::cout << "Wrong action!\n";
+	//		}
+	//		break;
+	//	case 2: // go to palatas
+	//		std::cout << "1: add a pacient; 2: print palatas\n";
+	//		std::cin >> action2;
+	//		switch (action2)
+	//		{
+	//		case 1:
+	//			std::cout << "1: create a pacient; 2: add years; 3: print pacients\n";
+	//			break;
+	//		case 2:
+	//			std::cout << "1: add a pacient; 2: print palatas\n";
+	//			break;
+	//		default:
+	//			std::cout << "Wrong action!\n";
+	//		}
+	//		break;
+	//		break;
+	//	case 3: // go to durkas
+	//		std::cout << "1: add a palata; 2: print durka\n";
+	//		std::cin >> action2;
+	//		switch (action2)
+	//		{
+	//		case 1:
+	//			std::cout << "1: create a pacient; 2: add years; 3: print pacients\n";
+	//			break;
+	//		case 2:
+	//			std::cout << "1: add a pacient; 2: print palatas\n";
+	//			break;
+	//		default:
+	//			std::cout << "Wrong action!\n";
+	//		}
+	//		break;
+	//	default:
+	//		std::cout << "Wrong action!\n";
+	//	}
+	//	action = 0, action2 = 0;
+	//	std::cout << std::endl;
+	//} while(1);
 
 
 	return 0;
