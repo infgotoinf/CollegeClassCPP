@@ -17,8 +17,8 @@ template <typename T3>
 struct Array {
 private:
 	T3* data;
-	size_t size = 0;
-	size_t capacity = 2;
+	uint16_t size = 0;
+	uint16_t capacity = 2;
 public:
 	Array(int init_capacity = 4) : capacity(init_capacity), size(0), data(new T3[init_capacity]) {}
 
@@ -44,7 +44,7 @@ public:
 		return data[index];
 	}
 
-	size_t GetSize() const
+	uint16_t GetSize() const
 	{
 		return size;
 	}
@@ -56,9 +56,9 @@ template <typename T4>
 struct BoolArray {
 private:
 	T4* data;
-	size_t size = 0;
+	uint16_t size = 0;
 public:
-	BoolArray(size_t siz)
+	BoolArray(uint16_t siz)
 	{
 		size = 0;
 		data = new int8_t[siz / 8];
@@ -84,13 +84,13 @@ public:
 	T4 operator[](unsigned int index) {
 		if (index >= size) throw std::out_of_range("Out of range");
 
-		size_t v = index / 8;
-		size_t u = index % 8;
+		uint16_t v = index / 8;
+		uint16_t u = index % 8;
 
 		return (data[v] >> (7 - u)) & 1;
 	}
 
-	size_t GetSize() const
+	uint16_t GetSize() const
 	{
 		return size;
 	}

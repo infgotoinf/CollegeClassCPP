@@ -8,7 +8,7 @@ class MatrixRow
 private:
 	std::vector<double> data;
 
-	MatrixRow(size_t cols = 3) : data(cols) {}
+	MatrixRow(uint16_t cols = 3) : data(cols) {}
 
 	/*double& operator[](int i)
 	{
@@ -30,7 +30,7 @@ private:
 	std::vector<MatrixRow> data;
 
 public:
-	Matrix(size_t rows = 3, size_t cols = 3)
+	Matrix(uint16_t rows = 3, uint16_t cols = 3)
 	{
 		data = std::vector<MatrixRow>(rows, MatrixRow(cols));
 	}
